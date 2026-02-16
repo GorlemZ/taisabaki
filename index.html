@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taisabaki Trainer</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <h1>Taisabaki</h1>
+
+      <div class="controls">
+        <label>
+          Comandi
+          <input type="number" id="numCommands" min="1" max="100" value="10" />
+        </label>
+        <label>
+          Intervallo (s)
+          <input type="number" id="interval" min="0.1" max="10" value="1" step="0.1" />
+        </label>
+        <label>
+          Deriva massima
+          <input type="number" id="maxDrift" min="1" max="10" value="3" />
+        </label>
+      </div>
+
+      <button id="playBtn" class="play-btn">Play</button>
+
+      <div class="status">
+        <span id="moveDisplay" class="move-display"></span>
+        <span id="counter" class="counter"></span>
+      </div>
+
+      <div class="track-container">
+        <div id="track" class="track"></div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
