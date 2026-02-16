@@ -13,6 +13,7 @@ const track = document.getElementById('track');
 let engine = createEngine(parseInt(maxDriftInput.value));
 let running = false;
 let abortController = null;
+let firstPlay = true;
 
 function buildTrack(maxDrift) {
   track.innerHTML = '';
@@ -66,6 +67,11 @@ async function run() {
   buildTrack(maxDrift);
 
   running = true;
+
+  if (firstPlay) {
+    firstPlay = false;
+    await speak('onegaishimasu');
+  }
   abortController = new AbortController();
   const { signal } = abortController;
 
