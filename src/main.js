@@ -85,12 +85,30 @@ async function run() {
     for (let i = 0; i < numCommands; i++) {
       if (signal.aborted) break;
 
+      const prevState = engine.getState();
       const move = engine.getNextMove();
-      moveDisplay.textContent = move;
+      const finalState = engine.getState();
       counter.textContent = `${i + 1} / ${numCommands}`;
-      updateDot(maxDrift);
 
-      await speak(move);
+      if (move === 'irimi-tenkan') {
+        // Sub-step 1: irimi (start audio + animate)
+        const midPos = prevState.position + prevState.facing;
+        engine.setState(midPos, prevState.facing);
+        moveDisplay.textContent = 'irimi';
+        updateDot(maxDrift);
+        const audioDone = speak('irimi-tenkan');
+
+        // Sub-step 2: tenkan (halfway through audio)
+        await sleep(500, signal);
+        engine.setState(finalState.position, finalState.facing);
+        moveDisplay.textContent = 'tenkan';
+        updateDot(maxDrift);
+        await audioDone;
+      } else {
+        moveDisplay.textContent = move;
+        updateDot(maxDrift);
+        await speak(move);
+      }
 
       if (i < numCommands - 1) {
         await sleep(interval, signal);

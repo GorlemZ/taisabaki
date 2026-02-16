@@ -3,6 +3,7 @@ const MOVES = {
   tenshin: (pos, facing) => ({ position: pos - facing, facing }),
   kaiten: (pos, facing) => ({ position: pos, facing: -facing }),
   tenkan: (pos, facing) => ({ position: pos + facing, facing: -facing }),
+  'irimi-tenkan': (pos, facing) => ({ position: pos + 2 * facing, facing: -facing }),
 };
 
 export function createEngine(maxDrift) {
@@ -40,5 +41,10 @@ export function createEngine(maxDrift) {
     maxDrift = val;
   }
 
-  return { getNextMove, reset, getState, setMaxDrift };
+  function setState(pos, fac) {
+    position = pos;
+    facing = fac;
+  }
+
+  return { getNextMove, reset, getState, setState, setMaxDrift };
 }

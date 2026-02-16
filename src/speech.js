@@ -2,7 +2,7 @@ const base = import.meta.env.BASE_URL;
 
 let ctx;
 const buffers = {};
-const CLIPS = ['irimi', 'tenshin', 'tenkan', 'kaiten', 'onegaishimasu'];
+const CLIPS = ['irimi', 'tenshin', 'tenkan', 'kaiten', 'irimi-tenkan', 'onegaishimasu'];
 
 async function loadBuffer(name) {
   const res = await fetch(`${base}audio/${name}.mp3`);
